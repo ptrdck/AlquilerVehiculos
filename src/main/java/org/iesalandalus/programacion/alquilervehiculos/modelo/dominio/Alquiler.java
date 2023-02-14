@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.alquilerverhiculos.modelo.dominio;
+package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ public class Alquiler {
 	
 	//Expresiones regulares y constantes
 	
-	public final static DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	final static DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private final static int PRECIO_DIA = 20;
 	
 	//Declaración de atributos
@@ -113,6 +113,10 @@ public class Alquiler {
 	
 	public void devolver(LocalDate fechaDevolucion)
 	{
+		if (fechaDevolucion != null)
+		{
+			throw new IllegalArgumentException("ERROR: La devolución ya estaba registrada.");
+		}
 		setFechaDevolucion(fechaDevolucion);
 	}
 	

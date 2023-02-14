@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.alquilerverhiculos.modelo.dominio;
+package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
