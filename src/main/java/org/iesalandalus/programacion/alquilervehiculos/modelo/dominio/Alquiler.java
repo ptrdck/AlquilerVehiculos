@@ -113,7 +113,7 @@ public class Alquiler {
 	
 	public void devolver(LocalDate fechaDevolucion)
 	{
-		if (fechaDevolucion != null)
+		if (fechaDevolucion.isBefore(fechaAlquiler) && fechaDevolucion != null)
 		{
 			throw new IllegalArgumentException("ERROR: La devolución ya estaba registrada.");
 		}
@@ -127,7 +127,7 @@ public class Alquiler {
 		//Extraemos el factor cilindrada del atributo cilindrada de turismo y lo dividimos por 10
 		int factorCilindrada = (int) (turismo.getCilindrada()/10);
 		//Extraemos la cantidad de días entre fechas de alquiler y devolución y lo casteamos a un entero
-		int numDias = (int) ChronoUnit.DAYS.between(fechaDevolucion, fechaAlquiler); 
+		int numDias = (int) ChronoUnit.DAYS.between(fechaAlquiler, fechaDevolucion); 
 		
 		//establecemos el valor de precio con la fórmula establecida en la tarea.
 		precio = (PRECIO_DIA + factorCilindrada)*numDias;
