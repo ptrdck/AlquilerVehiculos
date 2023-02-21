@@ -79,29 +79,30 @@ public class Alquileres
 	{
 		return coleccionAlquileres.size();
 	}
-	
+	//método que comprueba si existe alquiler de un cliente, o de un turismo y coteja las fechas
 	private void comprobarAlquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler) throws OperationNotSupportedException
 	{
 		for (Alquiler alquiler : coleccionAlquileres) 
 		{
+			//comprueba que el turismo buscado no esté alquilado
 	        if (alquiler.getTurismo().equals(turismo) && alquiler.getFechaDevolucion() == null)
 	        {
 	            throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
 	        }
-	        
+	        //comrueba que el cliente no tiene ningún alquiler pendiente de devolver
 	        if (alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() == null)
 	        {
 	            throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
 	        }
-	        
+	        //Comprueba que el turismo tiene un alquiler reservado
 	        if (alquiler.getTurismo().equals(turismo) && alquiler.getFechaDevolucion() != null &&
-	                alquiler.getFechaDevolucion().isAfter(fechaAlquiler))
+	                alquiler.getFechaAlquiler().isAfter(fechaAlquiler))
 	        {
-	            throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
+	            throw new OperationNotSupportedException("ERROR: El turismo tiene un alquiler posterior.");
 	        }
-	        
+	        //comprueba si el cliente tiene un alquiler tiene un alquiler posterior
 	        if (alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() != null &&
-	                alquiler.getFechaDevolucion().isAfter(fechaAlquiler))
+	                alquiler.getFechaAlquiler().isAfter(fechaAlquiler))
 	        {
 	            throw new OperationNotSupportedException("ERROR: El cliente tiene un alquiler posterior.");
 	        }
@@ -125,19 +126,19 @@ public class Alquileres
 	}
 	
 	//método devolver que ingreasa por parámetro un cliente y una fecha de devolución
-	public void devolver(Cliente cliente, LocalDate fechaDevolucion)
+	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion)
 	{
 		//for para recorrer la coleccionAlquileres
-		for (Alquiler alquiler: coleccionAlquileres)
+		for (Alquiler a: coleccionAlquileres)
 		{
 			//si el alquiler es null, lanzamos la excepcion
-			if (alquiler == null)
+			if (a == null)
 			{
 				throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");
 			}
 			//Si el alquiler recorrido contiene al mismo cliente y la fecha de devolución es null
 			//llamamos al método devolver de la clase Alquiler
-			if(alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() == null)
+			if(alquiler.getCliente().equals(a.getCliente()) && alquiler.getFechaDevolucion() == null)
 			{
 				alquiler.devolver(fechaDevolucion);
 				//una vez asignada la fecha devolución, rompemos el ciclo.
