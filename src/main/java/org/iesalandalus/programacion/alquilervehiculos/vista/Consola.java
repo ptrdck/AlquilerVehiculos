@@ -41,6 +41,7 @@ public class Consola
 	private static String leerCadena (String mensaje)
 	{
 		System.out.print(mensaje);
+		
 		return Entrada.cadena();
 	}
 	
@@ -48,6 +49,7 @@ public class Consola
 	{
 		
 		System.out.print(mensaje);
+		
 		return Entrada.entero();
 	}
 	
@@ -82,7 +84,9 @@ public class Consola
 				System.out.println("Opción no válida. Por favor, introduzca una opción válida");
 			}
 			
-		}while (true);
+		}while (Opcion.values()[opcion] == null);
+		
+		return Opcion.values()[opcion];
 	}
 	
 	public static Cliente leerCliente()

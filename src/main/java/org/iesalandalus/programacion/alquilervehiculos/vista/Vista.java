@@ -42,55 +42,55 @@ public class Vista
 	{
 		switch (opcion) {
         case SALIR:
-            controlador.terminar();
+            terminar();
             break;
         case INSERTAR_CLIENTE:
-            controlador.insertar(cliente);
+            insertarCliente();
             break;
         case INSERTAR_TURISMO:
-            controlador.borrar(turismo);
+            borrarTurismo();
             break;
         case INSERTAR_ALQUILER:
-            controlador.insertar();
+            insertarAlquiler();
             break;
         case BUSCAR_CLIENTE:
-            controlador.buscar();
+            buscarCliente();
             break;
         case BUSCAR_TURISMO:
-            controlador.buscar();
+            buscarTurismo();
             break;
         case BUSCAR_ALQUILER:
-            controlador.buscar();
+            buscarAlquiler();
             break;
         case MODIFICAR_CLIENTE:
-            controlador.modificar();
+            modificarCliente();
             break;
         case DEVOLVER_ALQUILER:
-            controlador.devolver();
+            devolverAlquiler();
             break;
         case BORRAR_CLIENTE:
-            controlador.borrar();
+            borrarCliente();
             break;
         case BORRAR_TURISMO:
-            controlador.borrar();
+            borrarTurismo();
             break;
         case BORRAR_ALQUILER:
-            controlador.borrar();
+            borrarAlquiler();
             break;
         case LISTAR_CLIENTES:
-            controlador.getClientes();
+            listarClientes();
             break;
         case LISTAR_TURISMOS:
-            controlador.getTurismos();
+            listarTurismos();
             break;
         case LISTAR_ALQUILERES:
-            controlador.getAlquileres();
+            listarAlquileres();
             break;
         case LISTAR_ALQUILERES_CLIENTE:
-            controlador.getAlquileres(null);
+            listarAlquileresCliente();
             break;
         case LISTAR_ALQUILERES_TURISMO:
-            controlador.getAlquileres(null);
+            listarAlquileresTurismo();
             break;
         default:
             System.out.println("Opción no válida");
@@ -195,10 +195,12 @@ public class Vista
 	private void modificarCliente()
 	{
 		 Consola.mostrarCabecera("Modificar cliente\n");
-		 Cliente cliente;
+		 Cliente cliente = Consola.leerClienteDni();
+		 String nombre = Consola.leerNombre();
+		 String telefono = Consola.leerTelefono();
 		    try
 		    {
-		    	cliente = controlador.modificar(Consola.leerCliente());
+		    	controlador.modificar(cliente, nombre, telefono);
 		    	String mensaje = (cliente != null) ? cliente.toString(): "El cliente indicado no se encuentra en el sistema";
 		    }
 		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
@@ -275,13 +277,13 @@ public class Vista
 	private void listarClientes()
 	{
 	    Consola.mostrarCabecera("Listado de clientes: ");
-	    List<String> clientes = controlador.getClientes();
+	    List<Cliente> clientes = controlador.getClientes();
 
 	    if (clientes.size() > 0)
 	    {
-	    	for(Iterator<String> it = clientes.iterator(); it.hasNext();)
+	    	for(Iterator<Cliente> it = clientes.iterator(); it.hasNext();)
 	    	{
-	    		String cliente = it.next();
+	    		Cliente cliente = it.next();
 	    		System.out.println(cliente);
 	    	}
 	    	
@@ -290,16 +292,16 @@ public class Vista
 	    	System.out.println("ERROR: No hay clientes que listar. Por favor, inserte primero un cliente en el sistema.");
 	}
 
-	private void listarTurismo()
+	private void listarTurismos()
 	{
 		 Consola.mostrarCabecera("Listado de turismos: ");
-		 List<String> turismos = controlador.getTurismos();
+		 List<Turismo> turismos = controlador.getTurismos();
 
 		 if (turismos.size() > 0)
 		 {
-		   	for(Iterator<String> it = turismos.iterator(); it.hasNext();)
+		   	for(Iterator<Turismo> it = turismos.iterator(); it.hasNext();)
 	    	{
-	    		String turismo = it.next();
+	    		Turismo turismo = it.next();
 	    		System.out.println(turismos);
 		    }
 		    	
@@ -311,13 +313,13 @@ public class Vista
 	private void listarAlquileres()
 	{
 		 Consola.mostrarCabecera("Listado de alquileres: ");
-		 List<String> alquileres = controlador.getAlquileres();
+		 List<Alquiler> alquileres = controlador.getAlquileres();
 
 		 if (alquileres.size() > 0)
 		 {
-			 for(Iterator<String> it = alquileres.iterator(); it.hasNext();)
+			 for(Iterator<Alquiler> it = alquileres.iterator(); it.hasNext();)
 			 {
-				 String alquiler = it.next();
+				 Alquiler alquiler = it.next();
 				 System.out.println(alquiler);
 			 }
 		    	
