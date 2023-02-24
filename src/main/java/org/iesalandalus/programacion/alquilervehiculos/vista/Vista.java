@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
@@ -34,7 +35,6 @@ public class Vista
 	
 	public void terminar()
 	{
-		System.out.println("¡Hasta la próxima!");
 		controlador.terminar();
 	}
 	
@@ -42,55 +42,55 @@ public class Vista
 	{
 		switch (opcion) {
         case SALIR:
-            controlador.salir();
+            controlador.terminar();
             break;
         case INSERTAR_CLIENTE:
-            controlador.insertarCliente();
+            controlador.insertar(cliente);
             break;
         case INSERTAR_TURISMO:
-            controlador.insertarTurismo();
+            controlador.borrar(turismo);
             break;
         case INSERTAR_ALQUILER:
-            controlador.insertarAlquiler();
+            controlador.insertar();
             break;
         case BUSCAR_CLIENTE:
-            controlador.buscarCliente();
+            controlador.buscar();
             break;
         case BUSCAR_TURISMO:
-            controlador.buscarTurismo();
+            controlador.buscar();
             break;
         case BUSCAR_ALQUILER:
-            controlador.buscarAlquiler();
+            controlador.buscar();
             break;
         case MODIFICAR_CLIENTE:
-            controlador.modificarCliente();
+            controlador.modificar();
             break;
         case DEVOLVER_ALQUILER:
-            controlador.devolverAlquiler();
+            controlador.devolver();
             break;
         case BORRAR_CLIENTE:
-            controlador.borrarCliente();
+            controlador.borrar();
             break;
         case BORRAR_TURISMO:
-            controlador.borrarTurismo();
+            controlador.borrar();
             break;
         case BORRAR_ALQUILER:
-            controlador.borrarAlquiler();
+            controlador.borrar();
             break;
         case LISTAR_CLIENTES:
-            controlador.listarClientes();
+            controlador.getClientes();
             break;
         case LISTAR_TURISMOS:
-            controlador.listarTurismos();
+            controlador.getTurismos();
             break;
         case LISTAR_ALQUILERES:
-            controlador.listarAlquileres();
+            controlador.getAlquileres();
             break;
         case LISTAR_ALQUILERES_CLIENTE:
-            controlador.listarAlquileresCliente();
+            controlador.getAlquileres(null);
             break;
         case LISTAR_ALQUILERES_TURISMO:
-            controlador.listarAlquileresTurismo();
+            controlador.getAlquileres(null);
             break;
         default:
             System.out.println("Opción no válida");
@@ -98,11 +98,6 @@ public class Vista
             }
 	}
 	
-	private void salir()
-	{
-	    System.out.println("Saliendo del programa...");
-	    controlador.salir();
-	}
 
 	private void insertarCliente()
 	{
@@ -110,7 +105,7 @@ public class Vista
 	    Consola.mostrarCabecera("Insertar cliente\n");
 	    try 
 	    {
-	    	controlador.insertarCliente(Consola.leerCliente());
+	    	controlador.insertar(Consola.leerCliente());
 	    	System.out.println("Cliente insertado con éxito");
 	    }
 	    catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
@@ -125,7 +120,7 @@ public class Vista
 	    
 	    try
 	    {
-	    	controlador.insertarTurismo(Consola.leerTurismo());
+	    	controlador.insertar(Consola.leerTurismo());
 	    	System.out.println("Turismo insertado con éxito");
 	    }
 	    catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
@@ -141,7 +136,7 @@ public class Vista
 		    
 		    try
 		    {
-		    	controlador.insertarAlquiler(Consola.leerAlquiler());
+		    	controlador.insertar(Consola.leerAlquiler());
 		    	System.out.println("Alquiler insertado con éxito");
 		    }
 		    catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
@@ -156,10 +151,10 @@ public class Vista
 		 Cliente cliente;
 		    try
 		    {
-		    	cliente = controlador.buscarCliente(Consola.leerClienteDni());
+		    	cliente = controlador.buscar(Consola.leerClienteDni());
 		    	String mensaje = (cliente != null) ? cliente.toString(): "El cliente indicado no se encuentra en el sistema";
 		    }
-		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
+		    catch (NullPointerException | IllegalArgumentException e)
 		    {
 		    	System.out.println(e.getMessage());
 		    }
@@ -171,10 +166,10 @@ public class Vista
 		 Turismo turismo;
 		    try
 		    {
-		    	turismo = controlador.buscarTurismo(Consola.leerTurismoMatricula());
+		    	turismo = controlador.buscar(Consola.leerTurismoMatricula());
 		    	String mensaje = (turismo != null) ? turismo.toString(): "El turismo indicado no se encuentra en el sistema";
 		    }
-		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
+		    catch (NullPointerException | IllegalArgumentException e)
 		    {
 		    	System.out.println(e.getMessage());
 		    }
@@ -188,10 +183,10 @@ public class Vista
 		 Alquiler alquiler;
 		    try
 		    {
-		    	alquiler = controlador.buscarAlquiler(Consola.leerAlquiler());
+		    	alquiler = controlador.buscar(Consola.leerAlquiler());
 		    	String mensaje = (alquiler != null) ? alquiler.toString(): "El alquiler indicado no se encuentra en el sistema";
 		    }
-		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
+		    catch (NullPointerException | IllegalArgumentException e)
 		    {
 		    	System.out.println(e.getMessage());
 		    }
@@ -203,7 +198,7 @@ public class Vista
 		 Cliente cliente;
 		    try
 		    {
-		    	cliente = controlador.modificarCliente(Consola.leerCliente());
+		    	cliente = controlador.modificar(Consola.leerCliente());
 		    	String mensaje = (cliente != null) ? cliente.toString(): "El cliente indicado no se encuentra en el sistema";
 		    }
 		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
@@ -218,7 +213,7 @@ public class Vista
 		 
 		    try
 		    {
-		    	controlador.devolverAlquiler(Consola.leerFechaDevolucion());
+		    	controlador.devolver(Consola.leerAlquiler(), Consola.leerFechaDevolucion());
 		    	System.out.println("Fecha de devolución correcta");
 		    }
 		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
@@ -233,7 +228,7 @@ public class Vista
 		 
 		    try
 		    {
-		    	controlador.borrarCliente(Consola.leerClienteDni());
+		    	controlador.borrar(Consola.leerClienteDni());
 		    	System.out.println("El cliente ha sido borrado con éxito");
 		    	
 		    }
@@ -249,7 +244,7 @@ public class Vista
 		 
 		    try
 		    {
-		    	controlador.borrarTurismo(Consola.leerTurismoMatricula());
+		    	controlador.borrar(Consola.leerTurismoMatricula());
 		    	System.out.println("El turismo ha sido borrado con éxito");
 		    	
 		    }
@@ -265,7 +260,7 @@ public class Vista
 		 
 		    try
 		    {
-		    	controlador.borrarAlquiler(Consola.leerAlquiler());
+		    	controlador.borrar(Consola.leerAlquiler());
 		    	System.out.println("El cliente ha sido borrado con éxito");
 		    	
 		    }
