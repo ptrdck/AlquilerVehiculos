@@ -132,9 +132,9 @@ public class Cliente {
 	}
 	
 	//método que devuelve un cliente existente ingresando un dni válido.
-	public Cliente getClienteConDni (String dni)
+	public static Cliente getClienteConDni (String dni)
 	{
-		return new Cliente(nombre, dni, telefono);
+		return new Cliente("Pedro Cardenas", dni, "644493758");
 	}
 	
 	//métodos hashCode y equals

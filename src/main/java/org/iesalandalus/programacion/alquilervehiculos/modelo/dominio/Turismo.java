@@ -109,9 +109,9 @@ public class Turismo {
 		this.matricula = matricula;
 	}
 	
-	public Turismo getTurismoConMatricula(String matricula)
+	public static Turismo getTurismoConMatricula(String matricula)
 	{
-		return new Turismo(marca, modelo, cilindrada, matricula);
+		return new Turismo("Seat", "Cordoba", 1900, matricula);
 	}
 
 	@Override
