@@ -70,28 +70,30 @@ public class Consola
 	
 	public static Opcion elegirOpcion()
 	{
-		int opcion;
+		int opcion = 0;
+		boolean verificador =false;
 		do 
 		{
-			mostrarMenu();
-			opcion = leerEntero("Opción: ");
-			try
+			try 
 			{
-				return Opcion.values()[opcion];
+				opcion = leerEntero("\nPor favor, seleccione una Opción: ");
+				Opcion.get(opcion);
+				verificador = true;
 			}
-			catch (IndexOutOfBoundsException e)
+			catch (Exception e)
 			{
-				System.out.println("Opción no válida. Por favor, introduzca una opción válida");
+				System.out.println(e.getMessage());
+				verificador = false;
 			}
 			
-		}while (Opcion.values()[opcion] == null);
+		}while (!verificador);
 		
-		return Opcion.values()[opcion];
+		return Opcion.get(opcion);
 	}
 	
 	public static Cliente leerCliente()
 	{
-		String dni = leerClienteDni().getDni();
+		String dni = leerCadena("\nIntroduzca el dni: ");
 		String nombre = leerNombre();
 		String telefono = leerTelefono();
 		
@@ -111,21 +113,21 @@ public class Consola
 	
 	public static String leerNombre()
 	{
-		System.out.print("Introduzca el nombre del cliente");
-		String nombre = leerCadena("Nombre: ");
+		System.out.print("\nIntroduzca el nombre del cliente: ");
+		String nombre = leerCadena("\nNombre: ");
 		return nombre;
 	}
 	
 	public static String leerTelefono()
 	{
-		System.out.print("Introduzca el número de teléfono del cliente");
-		String telefono = leerCadena("Telefono: ");
+		System.out.print("\nIntroduzca el número de teléfono del cliente");
+		String telefono = leerCadena("\nTelefono: ");
 		return telefono;
 	}
 	
 	public static Turismo leerTurismo()
 	{
-		String marca = leerCadena("Marca: ");
+		String marca = leerCadena("Marca: " + "Seat|Land Rover|KIA|Rolls-Royce|SsangYong");
 		String modelo = leerCadena("Modelo: ");
 		int cilindrada = leerEntero("Cilindrada: ");
 		String matricula = leerCadena("Matrícula: ");

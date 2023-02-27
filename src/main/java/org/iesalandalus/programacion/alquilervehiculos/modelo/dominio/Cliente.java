@@ -11,7 +11,7 @@ public class Cliente {
 	//Declaración de formatos válidos de las variables:
 	
 	//caso nombre, utilizaremos este método para poder ingresar nombres con carácteres extranjeros
-	private static final String ER_NOMBRE = "/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u";
+	private static final String ER_NOMBRE = "^([A-Z][a-z]+)(\\s[A-Z][a-z]+){1,2}$";
 	//Para verificar DNI y Teléfono, utilizaremos las expresiones regulares usadas en tareas anteriroes
 	private static final String ER_DNI = "([0-9]{8})([A-Za-z])";
 	private static final String ER_TELEFONO = "[679][0-9]{8}";

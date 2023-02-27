@@ -26,11 +26,16 @@ public class Vista
 	public void comenzar()
 	{
 		Consola.mostrarCabecera("Gestión de Alquileres");
-	
+		Opcion opcion;
 		do 
 		{
-			Consola.elegirOpcion();
-		}while(Consola.elegirOpcion() != Opcion.SALIR);
+			
+			Consola.mostrarMenu();
+			opcion = Consola.elegirOpcion();
+			ejecutar(opcion);
+			
+			
+		}while(opcion != Opcion.SALIR);
 	}	
 	
 	public void terminar()
@@ -48,7 +53,7 @@ public class Vista
             insertarCliente();
             break;
         case INSERTAR_TURISMO:
-            borrarTurismo();
+            insertarTurismo();
             break;
         case INSERTAR_ALQUILER:
             insertarAlquiler();
@@ -121,7 +126,7 @@ public class Vista
 	    try
 	    {
 	    	controlador.insertar(Consola.leerTurismo());
-	    	System.out.println("Turismo insertado con éxito");
+		    	System.out.println("Turismo insertado con éxito");
 	    }
 	    catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
 	    {
@@ -134,15 +139,15 @@ public class Vista
 	{
 		 Consola.mostrarCabecera("Insertar alquiler\n");
 		    
-		    try
-		    {
-		    	controlador.insertar(Consola.leerAlquiler());
-		    	System.out.println("Alquiler insertado con éxito");
-		    }
-		    catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
-		    {
-		    	System.out.println(e.getMessage());
-		    }
+		 try
+		 {
+			 controlador.insertar(Consola.leerAlquiler());
+			 System.out.println("Alquiler insertado con éxito");
+		 }
+		 catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e)
+		 {
+			 System.out.println(e.getMessage());
+		 }
 	}
 
 	private void buscarCliente()
