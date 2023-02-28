@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
@@ -106,7 +105,7 @@ public class Consola
 		System.out.print("Introduzca el DNI del cliente: ");
 		String dni = leerCadena("DNI: ");
 		
-		return new Cliente("", dni, "");
+		return new Cliente("Pedro Cardenas", dni, "644493658");
 		
 			
 	}
@@ -127,10 +126,10 @@ public class Consola
 	
 	public static Turismo leerTurismo()
 	{
-		String marca = leerCadena("Marca: " + "Seat|Land Rover|KIA|Rolls-Royce|SsangYong");
-		String modelo = leerCadena("Modelo: ");
-		int cilindrada = leerEntero("Cilindrada: ");
-		String matricula = leerCadena("Matrícula: ");
+		String marca = leerCadena("\nMarca " + "(Seat|Land Rover|KIA|Rolls-Royce|SsangYong):\n");
+		String modelo = leerCadena("\nModelo: ");
+		int cilindrada = leerEntero("\nCilindrada: ");
+		String matricula = leerCadena("\nMatrícula: ");
 		
 		return new Turismo(marca, modelo, cilindrada, matricula);
 	}
@@ -138,13 +137,13 @@ public class Consola
 	public static Turismo leerTurismoMatricula()
 	{
 		String matricula = leerCadena("Introduce la matrícula del turismo: ");
-	    return new Turismo(null, null, 0, matricula);
+	    return new Turismo("Seat", "Cordoba", 1500, matricula);
 	}
 	
 	public static Alquiler leerAlquiler()
 	{
-		Cliente cliente = leerCliente();
-		Turismo turismo = leerTurismo();
+		Cliente cliente = leerClienteDni();
+		Turismo turismo = leerTurismoMatricula();
 		LocalDate fechaAlquiler = leerFecha("Fecha alquiler: ");
 		
 		return new Alquiler(cliente, turismo, fechaAlquiler);

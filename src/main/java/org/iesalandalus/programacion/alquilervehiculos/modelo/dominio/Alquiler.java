@@ -102,7 +102,7 @@ public class Alquiler {
 		{
 			throw new IllegalArgumentException("ERROR: La fecha de devolución no puede ser futura.");
 		}
-		if (fechaDevolucion.isAfter(fechaAlquiler) || fechaDevolucion.isEqual(fechaAlquiler))
+		if (fechaDevolucion.isBefore(fechaAlquiler) || fechaDevolucion.isEqual(fechaAlquiler))
 		{
 			throw new IllegalArgumentException("ERROR: La fecha de devolución debe ser posterior a la fecha de alquiler.");
 		}
@@ -113,7 +113,7 @@ public class Alquiler {
 	
 	public void devolver(LocalDate fechaDevolucion)
 	{
-		if (fechaDevolucion.isBefore(fechaAlquiler) && fechaDevolucion != null)
+		if (fechaDevolucion.isAfter(fechaAlquiler) && fechaDevolucion != null)
 		{
 			throw new IllegalArgumentException("ERROR: La devolución ya estaba registrada.");
 		}
@@ -157,7 +157,16 @@ public class Alquiler {
 
 	@Override
 	public String toString() {
-		return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo, fechaAlquiler, fechaDevolucion);
+		
+		if(fechaDevolucion==null)
+		{
+			return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo, FORMATO_FECHA.format(fechaAlquiler), 
+					"Aún no devuelto", 0);
+		}
+		else
+		{
+			return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo, FORMATO_FECHA.format(fechaAlquiler), FORMATO_FECHA.format(fechaDevolucion), 10);
+		}
 	}
 	
 	

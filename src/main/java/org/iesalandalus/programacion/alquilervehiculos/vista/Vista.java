@@ -153,11 +153,10 @@ public class Vista
 	private void buscarCliente()
 	{
 		 Consola.mostrarCabecera("Buscar cliente\n");
-		 Cliente cliente;
+		 Cliente cliente = Consola.leerClienteDni();
 		    try
 		    {
-		    	cliente = controlador.buscar(Consola.leerClienteDni());
-		    	String mensaje = (cliente != null) ? cliente.toString(): "El cliente indicado no se encuentra en el sistema";
+		    	cliente = controlador.buscar(cliente);
 		    }
 		    catch (NullPointerException | IllegalArgumentException e)
 		    {
@@ -168,11 +167,10 @@ public class Vista
 	private void buscarTurismo()
 	{
 		 Consola.mostrarCabecera("Buscar turismo\n");
-		 Turismo turismo;
+		 Turismo turismo = Consola.leerTurismoMatricula();
 		    try
 		    {
-		    	turismo = controlador.buscar(Consola.leerTurismoMatricula());
-		    	String mensaje = (turismo != null) ? turismo.toString(): "El turismo indicado no se encuentra en el sistema";
+		    	turismo = controlador.buscar(turismo);
 		    }
 		    catch (NullPointerException | IllegalArgumentException e)
 		    {
@@ -185,11 +183,11 @@ public class Vista
 	private void buscarAlquiler()
 	{
 		 Consola.mostrarCabecera("Buscar alquiler\n");
-		 Alquiler alquiler;
+		 Alquiler alquiler = Consola.leerAlquiler();
 		    try
 		    {
-		    	alquiler = controlador.buscar(Consola.leerAlquiler());
-		    	String mensaje = (alquiler != null) ? alquiler.toString(): "El alquiler indicado no se encuentra en el sistema";
+		    	alquiler = controlador.buscar(alquiler);
+		    	
 		    }
 		    catch (NullPointerException | IllegalArgumentException e)
 		    {
@@ -206,7 +204,7 @@ public class Vista
 		    try
 		    {
 		    	controlador.modificar(cliente, nombre, telefono);
-		    	String mensaje = (cliente != null) ? cliente.toString(): "El cliente indicado no se encuentra en el sistema";
+		    	
 		    }
 		    catch (NullPointerException | OperationNotSupportedException| IllegalArgumentException e)
 		    {
@@ -307,7 +305,7 @@ public class Vista
 		   	for(Iterator<Turismo> it = turismos.iterator(); it.hasNext();)
 	    	{
 	    		Turismo turismo = it.next();
-	    		System.out.println(turismos);
+	    		System.out.println(turismo);
 		    }
 		    	
 		 }
