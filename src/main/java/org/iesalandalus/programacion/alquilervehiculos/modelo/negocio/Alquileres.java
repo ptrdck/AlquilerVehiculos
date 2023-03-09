@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Alquileres 
 {
@@ -56,7 +56,7 @@ public class Alquileres
 	}
 	
 	//Método get que toma por parámetro un turismo y devuelve una lista de alquileres asociados a dicho elemento
-	public List<Alquiler> get(Turismo turismo)
+	public List<Alquiler> get(Vehiculo turismo)
 	{
 		//inicializamos la lista
 		List<Alquiler> alquilerTurismo = new LinkedList<>();
@@ -80,7 +80,7 @@ public class Alquileres
 		return coleccionAlquileres.size();
 	}
 	//método que comprueba si existe alquiler de un cliente, o de un turismo y coteja las fechas
-	private void comprobarAlquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler) throws OperationNotSupportedException
+	private void comprobarAlquiler(Cliente cliente, Vehiculo turismo, LocalDate fechaAlquiler) throws OperationNotSupportedException
 	{
 		for (Alquiler alquiler : coleccionAlquileres) 
 		{

@@ -17,13 +17,13 @@ public class Alquiler {
 	//Declaración de atributos
 	
 	private Cliente cliente;
-	private Turismo turismo;
+	private Vehiculo turismo;
 	
 	private LocalDate fechaAlquiler;
 	private LocalDate fechaDevolucion;
 	
 	//Constructor con parámetros
-	public Alquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler)
+	public Alquiler(Cliente cliente, Vehiculo turismo, LocalDate fechaAlquiler)
 	{
 		setCliente(cliente);
 		setTurismo(turismo);
@@ -46,7 +46,7 @@ public class Alquiler {
 	public Cliente getCliente() {
 		return cliente;
 	}
-	public Turismo getTurismo() {
+	public Vehiculo getTurismo() {
 		return turismo;
 	}
 	public LocalDate getFechaAlquiler() {
@@ -68,7 +68,7 @@ public class Alquiler {
 		this.cliente = cliente;
 	}
 	
-	private void setTurismo(Turismo turismo) 
+	private void setTurismo(Vehiculo turismo) 
 	{
 		if (turismo == null)
 		{

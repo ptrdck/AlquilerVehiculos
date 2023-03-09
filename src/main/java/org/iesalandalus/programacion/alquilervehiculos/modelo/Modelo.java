@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
@@ -48,7 +48,7 @@ public class Modelo
 	}
 	
 	//Método para insertar un Turismo
-	public void insertar(Turismo turismo)throws OperationNotSupportedException
+	public void insertar(Vehiculo turismo)throws OperationNotSupportedException
 	{
 		turismos.insertar(turismo);
 	}
@@ -83,7 +83,7 @@ public class Modelo
 		return clientes.buscar(cliente);
 	}
 	
-	public Turismo buscar(Turismo turismo)
+	public Vehiculo buscar(Vehiculo turismo)
 	{
 		return turismos.buscar(turismo);
 	}
@@ -121,7 +121,7 @@ public class Modelo
 		
 	}
 	
-	public void borrar(Turismo turismo) throws OperationNotSupportedException
+	public void borrar(Vehiculo turismo) throws OperationNotSupportedException
 	{
 		for(Alquiler a: alquileres.get())
 		{
@@ -145,7 +145,7 @@ public class Modelo
 	}
 	
 	//método get para obtener una nueva lista de turismos
-	public List<Turismo> getTurismos()
+	public List<Vehiculo> getTurismos()
 	{
 		return new LinkedList<>(turismos.get());
 	}
@@ -171,7 +171,7 @@ public class Modelo
 	}
 	
 	//método get para obtener alquileres por turismo
-	public List<Alquiler> getAlquileres(Turismo turismo)
+	public List<Alquiler> getAlquileres(Vehiculo turismo)
 	{
 		List<Alquiler> alquileresTurismo = new LinkedList<Alquiler>();
 		for (Alquiler alquiler: alquileres.get())

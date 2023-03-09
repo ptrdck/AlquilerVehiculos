@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Turismos 
 {
 	//inicialización de lista (0..*)
-	private List<Turismo> coleccionTurismos;
+	private List<Vehiculo> coleccionTurismos;
 	
 	//Constructor por defecto, crea lista
 	public Turismos()
@@ -19,13 +19,13 @@ public class Turismos
 	}
 	
 	//método get para una nueva lista con los mismos elementos
-	public List<Turismo> get()
+	public List<Vehiculo> get()
 	{
 		//Iniciamos una nueva lista para dejar la copia
-		List<Turismo> copiaTurismos = new LinkedList<>();
+		List<Vehiculo> copiaTurismos = new LinkedList<>();
 		
 		//For each para recorrer toda la lista de turismos
-		for (Turismo turismo: coleccionTurismos)
+		for (Vehiculo turismo: coleccionTurismos)
 		{
 			//copiamos cada turismo en la nueva lista
 			copiaTurismos.add(turismo);
@@ -41,7 +41,7 @@ public class Turismos
 	}
 	
 	//método para insertar un turismo si y solo si este existe y no es nulo
-	public void insertar(Turismo turismo) throws OperationNotSupportedException
+	public void insertar(Vehiculo turismo) throws OperationNotSupportedException
 	{
 		if (turismo == null)
 		{
@@ -49,7 +49,7 @@ public class Turismos
 		}
 		else if (buscar(turismo) == null)
 		{
-			coleccionTurismos.add(new Turismo(turismo));
+			coleccionTurismos.add(new Vehiculo(turismo));
 		}
 		else
 		{
@@ -58,7 +58,7 @@ public class Turismos
 	}
 	
 	//Método para buscar un turismo si y solo este existe y no es nulo
-	public Turismo buscar(Turismo turismo)
+	public Vehiculo buscar(Vehiculo turismo)
 	{
 		if (turismo == null)
 		{
@@ -66,13 +66,13 @@ public class Turismos
 		}
 		else if (coleccionTurismos.contains(turismo))
 		{
-			return new Turismo(turismo);
+			return new Vehiculo(turismo);
 		}
 		else
 			return null;
 	}
 	
-	public void borrar(Turismo turismo) throws OperationNotSupportedException
+	public void borrar(Vehiculo turismo) throws OperationNotSupportedException
 	{
 		if (turismo == null)
 		{

@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola
@@ -124,26 +124,26 @@ public class Consola
 		return telefono;
 	}
 	
-	public static Turismo leerTurismo()
+	public static Vehiculo leerTurismo()
 	{
 		String marca = leerCadena("\nMarca " + "(Seat|Land Rover|KIA|Rolls-Royce|SsangYong):\n");
 		String modelo = leerCadena("\nModelo: ");
 		int cilindrada = leerEntero("\nCilindrada: ");
 		String matricula = leerCadena("\nMatrícula: ");
 		
-		return new Turismo(marca, modelo, cilindrada, matricula);
+		return new Vehiculo(marca, modelo, cilindrada, matricula);
 	}
 	
-	public static Turismo leerTurismoMatricula()
+	public static Vehiculo leerTurismoMatricula()
 	{
 		String matricula = leerCadena("Introduce la matrícula del turismo: ");
-	    return new Turismo("Seat", "Cordoba", 1500, matricula);
+	    return new Vehiculo("Seat", "Cordoba", 1500, matricula);
 	}
 	
 	public static Alquiler leerAlquiler()
 	{
 		Cliente cliente = leerClienteDni();
-		Turismo turismo = leerTurismoMatricula();
+		Vehiculo turismo = leerTurismoMatricula();
 		LocalDate fechaAlquiler = leerFecha("Fecha alquiler: ");
 		
 		return new Alquiler(cliente, turismo, fechaAlquiler);

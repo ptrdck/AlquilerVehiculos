@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Vista
 {
@@ -167,7 +167,7 @@ public class Vista
 	private void buscarTurismo()
 	{
 		 Consola.mostrarCabecera("Buscar turismo\n");
-		 Turismo turismo = Consola.leerTurismoMatricula();
+		 Vehiculo turismo = Consola.leerTurismoMatricula();
 		    try
 		    {
 		    	turismo = controlador.buscar(turismo);
@@ -298,13 +298,13 @@ public class Vista
 	private void listarTurismos()
 	{
 		 Consola.mostrarCabecera("Listado de turismos: ");
-		 List<Turismo> turismos = controlador.getTurismos();
+		 List<Vehiculo> turismos = controlador.getTurismos();
 
 		 if (turismos.size() > 0)
 		 {
-		   	for(Iterator<Turismo> it = turismos.iterator(); it.hasNext();)
+		   	for(Iterator<Vehiculo> it = turismos.iterator(); it.hasNext();)
 	    	{
-	    		Turismo turismo = it.next();
+	    		Vehiculo turismo = it.next();
 	    		System.out.println(turismo);
 		    }
 		    	

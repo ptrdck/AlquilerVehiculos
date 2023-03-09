@@ -16,7 +16,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class AlquilerTest {
 	private static final String MENSAJE_ERROR_ALQUILER_NULO = "ERROR: No es posible copiar un alquiler nulo.";
 
 	private static Cliente cliente;
-	private static Turismo turismo;
+	private static Vehiculo turismo;
 	private static LocalDate hoy;
 	private static LocalDate ayer;
 	private static LocalDate manana;
@@ -66,7 +66,7 @@ public class AlquilerTest {
 		when(turismo.getCilindrada()).thenReturn(90);
 	}
 	
-	private void setComportamiento(Turismo turismo, String matricula) {
+	private void setComportamiento(Vehiculo turismo, String matricula) {
 		when(turismo.getMatricula()).thenReturn(matricula);
 	}
 	
