@@ -29,7 +29,7 @@ public abstract class Vehiculo {
 	{
 		if (vehiculo == null)
 		{
-			throw new NullPointerException("ERROR: No es posible copiar un vehiculo nulo.");
+			throw new NullPointerException("ERROR: No es posible copiar un vehículo nulo.");
 		}
 		
 		setMarca(vehiculo.getMarca());
@@ -37,10 +37,31 @@ public abstract class Vehiculo {
 		setMatricula(vehiculo.getMatricula());
 	}
 	
-	public Vehiculo getVehiculoConMatricula(String matricula)
+	public Vehiculo copiar(Vehiculo vehiculo)
 	{
-		return new Vehiculo("Seat", "Cordoba", matricula);
+		if (vehiculo == null)
+		{
+			throw new NullPointerException("ERROR: No es posible copiar un vehículo nulo.");
+		}
+		if (vehiculo instanceof Turismo)
+		{
+			return new Turismo((Turismo) vehiculo);
+		}
+		else if (vehiculo instanceof Autobus)
+		{
+			return new Autobus((Autobus) vehiculo);
+		}
+		else if (vehiculo instanceof Furgoneta)
+		{
+			return new Furgoneta((Furgoneta) vehiculo);
+		}
+		else
+			throw new IllegalArgumentException("ERROR: El tipo vehículo no corresponde.");
 	}
+	
+	
+	public abstract Vehiculo getVehiculoConMatricula(String matricula);
+
 	protected abstract int getFactorPrecio();
 
 	

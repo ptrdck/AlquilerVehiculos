@@ -28,7 +28,7 @@ public class TurismosTest {
 
 	private static Vehiculo turismo1;
 	private static Vehiculo turismo2;
-	private Turismos turismos;
+	private Vehiculos vehiculos;
 
 	@BeforeAll
 	public static void setup() {
@@ -40,20 +40,20 @@ public class TurismosTest {
 	
 	@BeforeEach
 	void init() {
-		turismos = new Turismos();
+		vehiculos = new Vehiculos();
 	}
 
 	@Test
 	void constructorCreaTurismosCorrectamente() {
-		assertNotNull(turismos);
-		assertEquals(0, turismos.getCantidad());
+		assertNotNull(vehiculos);
+		assertEquals(0, vehiculos.getCantidad());
 	}
 	
 	@Test
 	void getDevuelveTurismosCorrectamente() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		assertDoesNotThrow(() -> turismos.insertar(turismo2));
-		List<Vehiculo> copiaTurismos = turismos.get();
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo2));
+		List<Vehiculo> copiaTurismos = vehiculos.get();
 		assertEquals(2, copiaTurismos.size());
 		assertEquals(turismo1, copiaTurismos.get(0));
 		assertSame(turismo1, copiaTurismos.get(0));
@@ -63,65 +63,65 @@ public class TurismosTest {
 	
 	@Test
 	void insertarTurismoValidoInsertaCorrectamente() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		assertEquals(1, turismos.getCantidad());
-		assertEquals(turismo1, turismos.buscar(turismo1));
-		assertSame(turismo1, turismos.buscar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		assertEquals(1, vehiculos.getCantidad());
+		assertEquals(turismo1, vehiculos.buscar(turismo1));
+		assertSame(turismo1, vehiculos.buscar(turismo1));
 	}
 	
 	@Test
 	void insertarTurismoNuloLanzaExcepcion() {
-		NullPointerException npe = assertThrows(NullPointerException.class, () -> turismos.insertar(null));
+		NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.insertar(null));
 		assertEquals(MENSAJE_ERROR_INSERTAR_CLIENTE_NULO, npe.getMessage());
 	}
 	
 	@Test
 	void insertarTurismoRepetidoLanzaExcepcion() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> turismos.insertar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> vehiculos.insertar(turismo1));
 		assertEquals(MENSAJE_ERROR_CLIENTE_EXISTE, onse.getMessage());
 	}
 	
 	@Test
 	void borrarTurismoExistenteBorraTurismoCorrectamente() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		assertDoesNotThrow(() -> turismos.borrar(turismo1));
-		assertEquals(0, turismos.getCantidad());
-		assertNull(turismos.buscar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.borrar(turismo1));
+		assertEquals(0, vehiculos.getCantidad());
+		assertNull(vehiculos.buscar(turismo1));
 	}
 	
 	@Test
 	void borrarTurismoNoExistenteLanzaExcepcion() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> turismos.borrar(turismo2));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> vehiculos.borrar(turismo2));
 		assertEquals(MENSAJE_ERROR_CLIENTE_BORRAR_NO_EXISTE, onse.getMessage());
-		assertEquals(1, turismos.getCantidad());
+		assertEquals(1, vehiculos.getCantidad());
 	}
 
 	@Test
 	void borrarTurismoNuloLanzaExcepcion() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		NullPointerException npe = assertThrows(NullPointerException.class, () -> turismos.borrar(null));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.borrar(null));
 		assertEquals(MENSAJE_ERROR_BORRAR_CLIENTE_NULO, npe.getMessage());
-		assertEquals(1, turismos.getCantidad());
+		assertEquals(1, vehiculos.getCantidad());
 	}
 	
 	@Test
 	void busarTurismoExistenteDevuelveTurismoCorrectamente() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		assertEquals(turismo1, turismos.buscar(turismo1));
-		assertSame(turismo1, turismos.buscar(turismo1));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		assertEquals(turismo1, vehiculos.buscar(turismo1));
+		assertSame(turismo1, vehiculos.buscar(turismo1));
 	}
 	
 	@Test
 	void busarTurismoeNoExistenteDevuelveTurismoNulo() {
-		assertNull(turismos.buscar(turismo1));
+		assertNull(vehiculos.buscar(turismo1));
 	}
 	
 	@Test
 	void buscarTurismoNuloLanzaExcepcion() {
-		assertDoesNotThrow(() -> turismos.insertar(turismo1));
-		NullPointerException npe = assertThrows(NullPointerException.class, () -> turismos.buscar(null));
+		assertDoesNotThrow(() -> vehiculos.insertar(turismo1));
+		NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.buscar(null));
 		assertEquals(MENSAJE_ERROR_BUSCAR_CLIENTE_NULO, npe.getMessage());
 	}
 

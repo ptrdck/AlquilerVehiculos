@@ -29,7 +29,7 @@ public class Turismo extends Vehiculo
 		
 	}
 	public int getCilindrada() {
-		// TODO Auto-generated method stub
+		
 		return this.cilindrada;
 	}
 	
@@ -56,6 +56,12 @@ public class Turismo extends Vehiculo
 	public String toString() 
 	{
 		return String.format("%s %s (%sCV) - %s", super.getMarca(), super.getModelo(), cilindrada, super.getMatricula(), "disponible");
+	}
+
+	@Override
+	public Vehiculo getVehiculoConMatricula(String matricula) {
+		
+		return new Turismo("Seat", "Cordoba", 1900, matricula);
 	}
 
 }

@@ -17,16 +17,16 @@ public class Alquiler {
 	//Declaración de atributos
 	
 	private Cliente cliente;
-	private Vehiculo turismo;
+	private Vehiculo vehiculo;
 	
 	private LocalDate fechaAlquiler;
 	private LocalDate fechaDevolucion;
 	
 	//Constructor con parámetros
-	public Alquiler(Cliente cliente, Vehiculo turismo, LocalDate fechaAlquiler)
+	public Alquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fechaAlquiler)
 	{
 		setCliente(cliente);
-		setTurismo(turismo);
+		setVehiculo(vehiculo);
 		setFechaAlquiler(fechaAlquiler);
 	}
 	
@@ -38,7 +38,7 @@ public class Alquiler {
 			throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");
 		}
 		setCliente(alquiler.getCliente());
-		setTurismo(alquiler.getTurismo());
+		setVehiculo(alquiler.getVehiculo().copiar(getVehiculo()));
 		setFechaAlquiler(alquiler.getFechaAlquiler());
 	}
 	
@@ -46,8 +46,8 @@ public class Alquiler {
 	public Cliente getCliente() {
 		return cliente;
 	}
-	public Vehiculo getTurismo() {
-		return turismo;
+	public Vehiculo getVehiculo() {
+		return vehiculo;
 	}
 	public LocalDate getFechaAlquiler() {
 		return fechaAlquiler;
@@ -68,13 +68,13 @@ public class Alquiler {
 		this.cliente = cliente;
 	}
 	
-	private void setTurismo(Vehiculo turismo) 
+	private void setVehiculo(Vehiculo vehiculo) 
 	{
-		if (turismo == null)
+		if (vehiculo == null)
 		{
 			throw new NullPointerException("ERROR: El turismo no puede ser nulo.");
 		}
-		this.turismo = turismo;
+		this.vehiculo = vehiculo;
 	}
 	
 	//método set para evaluar que la fecha de alquiler no sea nula ni posterior a la fecha actual. 
@@ -124,13 +124,11 @@ public class Alquiler {
 	{
 		//declaramos la variable local de tipo entero precio
 		int precio;
-		//Extraemos el factor cilindrada del atributo cilindrada de turismo y lo dividimos por 10
-		int factorCilindrada = (int) (turismo.getCilindrada()/10);
 		//Extraemos la cantidad de días entre fechas de alquiler y devolución y lo casteamos a un entero
 		int numDias = (int) ChronoUnit.DAYS.between(fechaAlquiler, fechaDevolucion); 
 		
 		//establecemos el valor de precio con la fórmula establecida en la tarea.
-		precio = (PRECIO_DIA + factorCilindrada)*numDias;
+		precio = (PRECIO_DIA + vehiculo.getFactorPrecio())*numDias;
 		
 		//retornamos el valor de precio
 		return precio;
@@ -139,7 +137,7 @@ public class Alquiler {
 	// hashCode y equals que verifican que dos objetos son iguales si su cliente, turismo y fechaAlquier son los mismos
 	@Override
 	public int hashCode() {
-		return Objects.hash(cliente, fechaAlquiler, turismo);
+		return Objects.hash(cliente, fechaAlquiler, vehiculo);
 	}
 
 	@Override
@@ -152,7 +150,7 @@ public class Alquiler {
 			return false;
 		Alquiler other = (Alquiler) obj;
 		return Objects.equals(cliente, other.cliente) && Objects.equals(fechaAlquiler, other.fechaAlquiler)
-				&& Objects.equals(turismo, other.turismo);
+				&& Objects.equals(vehiculo, other.vehiculo);
 	}
 
 	@Override
@@ -160,12 +158,12 @@ public class Alquiler {
 		
 		if(fechaDevolucion==null)
 		{
-			return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo, FORMATO_FECHA.format(fechaAlquiler), 
+			return String.format("%s <---> %s, %s - %s (%d€)", cliente, vehiculo, FORMATO_FECHA.format(fechaAlquiler), 
 					"Aún no devuelto", 0);
 		}
 		else
 		{
-			return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo, FORMATO_FECHA.format(fechaAlquiler), FORMATO_FECHA.format(fechaDevolucion), 10);
+			return String.format("%s <---> %s, %s - %s (%d€)", cliente, vehiculo, FORMATO_FECHA.format(fechaAlquiler), FORMATO_FECHA.format(fechaDevolucion), 10);
 		}
 	}
 	

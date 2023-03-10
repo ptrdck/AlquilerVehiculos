@@ -54,6 +54,13 @@ public class Autobus extends Vehiculo
 	{
 		return String.format("%s %s (%sCV) - %s", super.getMarca(), super.getModelo(), plazas, super.getMatricula(), "disponible");
 	}
+
+
+	@Override
+	public Vehiculo getVehiculoConMatricula(String matricula) {
+		
+		return new Autobus("Seat","Cordoba", 10, matricula);
+	}
 	
 	
 

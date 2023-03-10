@@ -65,4 +65,10 @@ public class Furgoneta extends Vehiculo
 		return String.format("%s %s (%sCV) - %s", super.getMarca(), super.getModelo(), pma, plazas, super.getMatricula(), "disponible");
 	}
 
+	@Override
+	public Vehiculo getVehiculoConMatricula(String matricula) {
+		
+		return new Furgoneta("Seat", "Cordoba", 0, 0, matricula);
+	}
+
 }

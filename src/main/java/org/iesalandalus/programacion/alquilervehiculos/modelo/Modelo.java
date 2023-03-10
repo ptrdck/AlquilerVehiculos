@@ -11,14 +11,14 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Vehiculos;
 
 public class Modelo 
 {
 
 	//declaramos las clases anteriores como atributes de clase de modelo (0,1)
 	private Clientes clientes;
-	private Turismos turismos;
+	private Vehiculos vehiculos;
 	private Alquileres alquileres;
 	
 	//Constructor
@@ -31,7 +31,7 @@ public class Modelo
 	public void comenzar()
 	{
 		clientes = new Clientes();
-		turismos = new Turismos();
+		vehiculos = new Vehiculos();
 		alquileres = new Alquileres();
 	}
 	
@@ -50,7 +50,7 @@ public class Modelo
 	//Método para insertar un Turismo
 	public void insertar(Vehiculo turismo)throws OperationNotSupportedException
 	{
-		turismos.insertar(turismo);
+		vehiculos.insertar(turismo);
 	}
 	
 	//método para insertar Alquiler
@@ -85,7 +85,7 @@ public class Modelo
 	
 	public Vehiculo buscar(Vehiculo turismo)
 	{
-		return turismos.buscar(turismo);
+		return vehiculos.buscar(turismo);
 	}
 	
 	public Alquiler buscar(Alquiler alquiler)
@@ -130,7 +130,7 @@ public class Modelo
 				borrar(a);
 			}
 		}
-		turismos.borrar(turismo);
+		vehiculos.borrar(turismo);
 	}
 	
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException
@@ -147,7 +147,7 @@ public class Modelo
 	//método get para obtener una nueva lista de turismos
 	public List<Vehiculo> getTurismos()
 	{
-		return new LinkedList<>(turismos.get());
+		return new LinkedList<>(vehiculos.get());
 	}
 	
 	//método get para obtener una nueva lista de alquileres

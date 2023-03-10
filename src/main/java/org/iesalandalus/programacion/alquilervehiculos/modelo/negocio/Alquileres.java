@@ -56,7 +56,7 @@ public class Alquileres
 	}
 	
 	//Método get que toma por parámetro un turismo y devuelve una lista de alquileres asociados a dicho elemento
-	public List<Alquiler> get(Vehiculo turismo)
+	public List<Alquiler> get(Vehiculo vehiculo)
 	{
 		//inicializamos la lista
 		List<Alquiler> alquilerTurismo = new LinkedList<>();
@@ -66,7 +66,7 @@ public class Alquileres
 		{
 			//Condición que evalúa cada alquiler extrayendo la información del turismo y la compara 
 			//con el turismo pasado por parámetro
-			if (alquiler.getTurismo().equals(turismo))
+			if (alquiler.getVehiculo().equals(vehiculo))
 			{
 				//Si el turismo es el mismo que el ingresado por parámetro, lo agregamos a la nueva lista
 				alquilerTurismo.add(alquiler);
@@ -80,12 +80,12 @@ public class Alquileres
 		return coleccionAlquileres.size();
 	}
 	//método que comprueba si existe alquiler de un cliente, o de un turismo y coteja las fechas
-	private void comprobarAlquiler(Cliente cliente, Vehiculo turismo, LocalDate fechaAlquiler) throws OperationNotSupportedException
+	private void comprobarAlquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fechaAlquiler) throws OperationNotSupportedException
 	{
 		for (Alquiler alquiler : coleccionAlquileres) 
 		{
 			//comprueba que el turismo buscado no esté alquilado
-	        if (alquiler.getTurismo().equals(turismo) && alquiler.getFechaDevolucion() == null)
+	        if (alquiler.getVehiculo().equals(vehiculo) && alquiler.getFechaDevolucion() == null)
 	        {
 	            throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
 	        }
@@ -95,7 +95,7 @@ public class Alquileres
 	            throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
 	        }
 	        //Comprueba que el turismo tiene un alquiler reservado
-	        if (alquiler.getTurismo().equals(turismo) && alquiler.getFechaDevolucion() != null &&
+	        if (alquiler.getVehiculo().equals(vehiculo) && alquiler.getFechaDevolucion() != null &&
 	                alquiler.getFechaAlquiler().isAfter(fechaAlquiler))
 	        {
 	            throw new OperationNotSupportedException("ERROR: El turismo tiene un alquiler posterior.");
@@ -120,7 +120,7 @@ public class Alquileres
 		}
 		//Llamada al método para comprobar las condiciones para que pueda insertarse el alquiler en la lista 
 		//de alquileres
-		comprobarAlquiler(alquiler.getCliente(), alquiler.getTurismo(), alquiler.getFechaAlquiler());
+		comprobarAlquiler(alquiler.getCliente(), alquiler.getVehiculo(), alquiler.getFechaAlquiler());
 		
 		coleccionAlquileres.add(alquiler);
 	}
